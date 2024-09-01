@@ -1,9 +1,9 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from './utils'
-import App from '../App'
+import { renderWithProviders } from '../../redux/__tests__/utils'
+import App from '../../App'
 
-it('Watch Later movies page', async () => {
+it('Should render "Watch Later" movies page', async () => {
     renderWithProviders(<App />)
 
     await userEvent.type(screen.getByTestId('search-movies'), 'forrest gump')

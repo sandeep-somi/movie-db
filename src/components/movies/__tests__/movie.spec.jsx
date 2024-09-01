@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from './utils'
-import App from '../App'
+import { renderWithProviders } from '../../../redux/__tests__/utils'
+import App from '../../../App'
 
 it('movies starred and saved to watch later', async () => {
     renderWithProviders(<App />)
