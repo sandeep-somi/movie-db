@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom"
 import Header from './components/header'
-import Starred from './pages/starred'
-import WatchLater from './pages/watch-later'
-import Home from './pages/home'
+import Starred from './pages/Starred'
+import WatchLater from './pages/WatchLater'
+import Home from './pages/Home'
 import React from "react"
 import './styles/app.scss'
 
