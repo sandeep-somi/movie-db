@@ -4,7 +4,6 @@ import starredSlice from '../redux/starredSlice'
 import Layout from '../components/layout'
 import { useSearchParams } from 'react-router-dom';
 
-
 const Starred = () => {
   const { clearAllStarred } = starredSlice.actions
   const [searchParams, setSearchParams] = useSearchParams()
