@@ -41,6 +41,7 @@ const moviesSlice = createSlice({
             state.loading = true
         })
         builder.addCase(fetchMovies.rejected, (state) => {
+            console.log('test rejected', state)
             state.loading = false
         })
     }

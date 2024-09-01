@@ -1,32 +1,40 @@
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import starredSlice from '../redux/starredSlice'
-import './starred.scss'
-import Movies from '../components/movies'
+import Layout from '../components/layout'
+import { useSearchParams } from 'react-router-dom';
+
 
 const Starred = () => {
-  const { starredMovies } = useSelector((state) => state.starred)
   const { clearAllStarred } = starredSlice.actions
+  const [searchParams, setSearchParams] = useSearchParams()
+  const query = searchParams.get('search')
+  
+  const movies = useSelector(({ starred }) => {
+    if (!query) return starred?.starredMovies
+    return starred?.starredMovies?.filter((movie) => movie.title.toLowerCase().includes(query.toLowerCase()))
+  })
+
   const dispatch = useDispatch()
-  const hasMovies = !!starredMovies.length;
+  const onClear = () => {
+    dispatch(clearAllStarred())
+  }
+
+  const clearSearch = () => {
+    setSearchParams()
+  }
 
   return (
-    <div className="starred" data-testid="starred">
-      {hasMovies && (<div data-testid="starred-movies" className="starred-movies">
-        <h6 className="header">Starred movies</h6>
-        <Movies movies={starredMovies} />
-        <footer className="common-last-element">
-          <button className="btn btn-primary" onClick={() => dispatch(clearAllStarred())}>Remove All</button>
-        </footer>
-      </div>)}
-
-      {!hasMovies && (<div className="common-last-element">
-        <i className="bi bi-star" />
-        <p>There are no starred movies.</p>
-        <p>Go to <Link to='/'>Home</Link></p>
-      </div>)}
-    </div>
+    <Layout
+      title="Starred"
+      subtitle="There are no starred movies."
+      movies={movies}
+      onClear={onClear}
+      query={query}
+      clearSearch={clearSearch}
+    />
   )
 }
 
 export default Starred
+

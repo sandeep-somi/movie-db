@@ -1,8 +1,9 @@
+import React from 'react'
 import { useState } from 'react'
-import Modal from '../common/modal'
+import Modal from '../modal'
 import Movie from './movie'
 import { getMovieAPI } from '../../apis'
-import YouTubePlayer from '../common/YoutubePlayer'
+import YouTubePlayer from '../video-player/youtube-player'
 
 const Movies = ({ movies }) => {
     const [videoKey, setVideoKey] = useState()
@@ -15,6 +16,7 @@ const Movies = ({ movies }) => {
         const { videos = [] } = await getMovieAPI(id)
         if (videos?.results?.length) {
             const trailer = videos.results.find((vid) => vid.type === 'Trailer')
+            console.log(trailer)
             setVideoKey(trailer ? trailer.key : videos.results[0].key)
         }
     }

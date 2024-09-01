@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useRef } from 'react';
+import { useState, useEffect, useCallback } from "react";
 import { Link, NavLink, useSearchParams, createSearchParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { debounce } from "../../utils";
@@ -7,12 +8,14 @@ const Header = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('search');
   const [search, setSearch] = useState(searchQuery || '');
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     setSearch(searchQuery || '');
   }, [searchQuery]);
 
-  const getSearchResults = useCallback((query) => {
+  const getSearchResults = useCallback(query => {
+    console.log('test', query);
     if (query !== '') {
       setSearchParams(createSearchParams({ search: query }), { replace: true })
     } else {
@@ -20,8 +23,8 @@ const Header = () => {
     }
   }, [setSearchParams])
 
-  const debouncedSearchMovies = useMemo(() => {
-    return debounce(getSearchResults, 500)
+  const debouncedSearchMovies = useCallback(value => {
+    debounce(getSearchResults, 500, timeoutRef)(value)
   }, [getSearchResults])
 
   const onSearch = ({ target: { value } }) => {
@@ -29,7 +32,7 @@ const Header = () => {
     debouncedSearchMovies(value);
   };
 
-  const { starredMovies } = useSelector((state) => state.starred);
+  const { starredMovies } = useSelector(state => state.starred);
 
   return (
     <header data-testid='movie-db-header'>
