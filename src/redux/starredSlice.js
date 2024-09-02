@@ -7,7 +7,6 @@ const starredSlice = createSlice({
     },
     reducers: {
         starMovie: (state, action) => {
-            console.log('test here', state)
             state.starredMovies = [action.payload, ...state.starredMovies]
         },
         unstarMovie: (state, action) => {

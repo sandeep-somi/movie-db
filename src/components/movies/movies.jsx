@@ -16,7 +16,6 @@ const Movies = ({ movies }) => {
         const { videos = [] } = await getMovieAPI(id)
         if (videos?.results?.length) {
             const trailer = videos.results.find((vid) => vid.type === 'Trailer')
-            console.log(trailer)
             setVideoKey(trailer ? trailer.key : videos.results[0].key)
         }
     }

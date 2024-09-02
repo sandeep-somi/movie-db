@@ -15,7 +15,6 @@ const Header = () => {
   }, [searchQuery]);
 
   const getSearchResults = useCallback(query => {
-    console.log('test', query);
     if (query !== '') {
       setSearchParams(createSearchParams({ search: query }), { replace: true })
     } else {
