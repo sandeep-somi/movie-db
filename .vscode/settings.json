@@ -1,4 +1,5 @@
 {
   "workbench.sideBar.location": "left",
-  "workbench.editor.alwaysShowEditorActions": false
+  "workbench.editor.alwaysShowEditorActions": false,
+  "workbench.activityBar.orientation": "vertical"
 }

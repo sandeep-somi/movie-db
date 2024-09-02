@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovies, resetMovies } from '../redux/moviesSlice'
 import Movies from '../components/movies'
 import useInfiniteScroll from '../hooks/useInfiniteScroll'
+import Loader from '../components/loader'
 
 const Discover = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const Discover = () => {
     <>
       <Movies movies={movies} />
       <div className='common-last-element' ref={lastElementRef}>
-        {shouldShowLoading ? <Loading /> : (
+        {shouldShowLoading ? <Loader /> : (
           <>
             {hasMovies ? <p>No more results found</p> : (
               <div>
@@ -47,7 +48,3 @@ const Discover = () => {
 }
 
 export default Discover
-
-const Loading = () => (
-  <div>Loading...</div>
-)

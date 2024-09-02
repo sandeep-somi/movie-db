@@ -4,7 +4,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 // eslint-disable-next-line jest/no-mocks-import
 import wrapper from '../../../__mocks__/provider-wrapper';
 // eslint-disable-next-line jest/no-mocks-import
-import { mockMovies } from '../../../__mocks__/movies.mock';
+import { mockMovies } from '../../../constants/jest-helpers';
 import Layout from '../layout'
 
 describe('Layout', () => {
@@ -13,7 +13,7 @@ describe('Layout', () => {
   it('should render with movies', () => {
     render(
         <Layout
-          movies={mockMovies.results}
+        movies={mockMovies.results}
           title="Test Title"
           subtitle="Test Subtitle"
           onClear={mockOnClear}
@@ -21,17 +21,17 @@ describe('Layout', () => {
         { wrapper }
     )
 
-    expect(screen.getByTestId('layout')).toBeInTheDocument()
-    expect(screen.getByText('Test Title')).toBeInTheDocument()
-    expect(screen.getByText('Remove All')).toBeInTheDocument()
-    expect(screen.queryByText('Test Subtitle')).not.toBeInTheDocument()
+    expect(screen.getByTestId('layout')).toBeDefined()
+    expect(screen.getByText('Test Title')).toBeDefined()
+    expect(screen.getByText('Remove All')).toBeDefined()
+    expect(screen.queryByText('Test Subtitle')).toBeNull()
   })
 
   it('should render without movies', () => {
-    const mockMovies = []
+    const movies = []
       render(
         <Layout
-          movies={mockMovies}
+          movies={movies}
           title="Test Title"
           subtitle="Test Subtitle"
           onClear={mockOnClear}
@@ -39,12 +39,12 @@ describe('Layout', () => {
         { wrapper }
       )
 
-    expect(screen.getByTestId('layout')).toBeInTheDocument()
-    expect(screen.queryByText('Test Title')).not.toBeInTheDocument()
-    expect(screen.queryByText('Remove All')).not.toBeInTheDocument()
-    expect(screen.getByText('Test Subtitle')).toBeInTheDocument()
-    expect(screen.getByText('Go to')).toBeInTheDocument()
-    expect(screen.getByText('Home')).toBeInTheDocument()
+    expect(screen.getByTestId('layout')).toBeDefined()
+    expect(screen.queryByText('Test Title')).toBeNull()
+    expect(screen.queryByText('Remove All')).toBeNull()
+    expect(screen.getByText('Test Subtitle')).toBeDefined()
+    expect(screen.getByText('Go to')).toBeDefined()
+    expect(screen.getByText('Home')).toBeDefined()
   })
 
   it('should calls onClear when Remove All button is clicked', () => {

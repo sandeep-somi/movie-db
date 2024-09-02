@@ -7,6 +7,6 @@ import wrapper from '../../__mocks__/provider-wrapper'
 describe('WatchLater', () => {
   it('should render', () => {
     const { container } = render(<WatchLater />, { wrapper })
-    expect(container).toBeInTheDocument()
+    expect(container).toBeDefined()
   })
 })

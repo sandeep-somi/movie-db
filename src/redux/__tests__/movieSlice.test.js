@@ -1,5 +1,5 @@
 import moviesSlice, { fetchMovies } from '../moviesSlice'
-import { mockMovies } from '../../__mocks__/movies.mock'
+import { mockMovies } from '../../constants/jest-helpers'
 
 jest.mock('../../apis', () => ({
     getMoviesAPI: jest.fn(() => Promise.resolve(mockMovies)),

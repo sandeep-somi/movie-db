@@ -33,7 +33,7 @@ describe('Modal', () => {
       </Modal>
     )
 
-    expect(container).toBeInTheDocument()
+    expect(container).toBeDefined()
   })
 
   it('should renders when isOpen is true', () => {
@@ -43,8 +43,8 @@ describe('Modal', () => {
       </Modal>
     )
 
-    expect(screen.getByTestId('modal')).toBeInTheDocument()
-    expect(screen.getByText('Test Content')).toBeInTheDocument()
+    expect(screen.getByTestId('modal')).toBeDefined()
+    expect(screen.getByText('Test Content')).toBeDefined()
   })
 
   it('should not render when isOpen is false', () => {
@@ -54,6 +54,6 @@ describe('Modal', () => {
       </Modal>
     )
 
-    expect(screen.queryByTestId('modal')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('modal')).toBeNull()
   })
 })
