@@ -7,7 +7,7 @@ module.exports = async () => ({
   },
   setupFilesAfterEnv: ["<rootDir>/src/setup-tests.js"],
   moduleNameMapper: {
-    '\\.scss$': '<rootDir>/__mocks__/style.mock.js',
-     '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/__mocks__/file.mock.js',
+    '\\.scss$': '<rootDir>/src/__mocks__/style.mock.js',
+     '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/src/__mocks__/file.mock.js',
   }
 })
