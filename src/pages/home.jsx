@@ -25,23 +25,29 @@ const Discover = () => {
   };
 
   const lastElementRef = useInfiniteScroll(loadMoreMovies, hasMore, loading);
-  const shouldShowLoading = loading || hasMore
-  const hasMovies = movies.length
+
+  const renderContent = () => {
+    if (loading || hasMore) {
+      return <Loader />
+    }
+
+    if (movies.length) {
+      return <p>No more results found</p>
+    }
+
+    return (
+      <div>
+        <p>No Results Found</p>
+        <p>{query && 'For: '} {query}</p>
+      </div>
+    )
+  }
 
   return (
     <>
       <Movies movies={movies} />
       <div className='common-last-element' ref={lastElementRef}>
-        {shouldShowLoading ? <Loader /> : (
-          <>
-            {hasMovies ? <p>No more results found</p> : (
-              <div>
-                <p>No Results Found</p>
-                <p>{query && 'For: '} {query}</p>
-              </div>
-            )}
-          </>
-        )}
+        {renderContent()}
       </div>
     </>
   )

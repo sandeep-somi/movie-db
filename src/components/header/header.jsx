@@ -34,6 +34,17 @@ const Header = () => {
 
   const { starredMovies } = useSelector(state => state.starred);
 
+  const renderStarredIcon = () => {
+    if (starredMovies.length) {
+      return <>
+        <i className="bi bi-star-fill bi-star-fill-white" />
+        <sup className="star-number">{starredMovies.length}</sup>
+      </>
+    }
+
+    return <i className="bi bi-star" />
+  }
+
   return (
     <header data-testid='movie-db-header'>
       <Link to="/" data-testid="home">
@@ -42,14 +53,7 @@ const Header = () => {
 
       <nav>
         <NavLink to="/starred" data-testid="nav-starred" className="nav-starred">
-          {starredMovies.length > 0 ? (
-            <>
-              <i className="bi bi-star-fill bi-star-fill-white" />
-              <sup className="star-number">{starredMovies.length}</sup>
-            </>
-          ) : (
-            <i className="bi bi-star" />
-          )}
+          {renderStarredIcon()}
         </NavLink>
         <NavLink to="/watch-later" className="nav-fav">
           Watch Later
