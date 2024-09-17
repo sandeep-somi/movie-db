@@ -1,12 +1,23 @@
 import React from 'react'
-import Starred from '../starred-movies'
+import StarredMovies from '../starred-movies'
 import { render } from '@testing-library/react'
 // eslint-disable-next-line jest/no-mocks-import
 import wrapper from '../../__mocks__/provider-wrapper'
+// eslint-disable-next-line jest/no-mocks-import
+import { mockMovies } from '../../constants/jest-helpers'
 
-describe('Starred', () => {
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useSelector: jest.fn(() => mockMovies)
+}))
+
+describe('<StarredMovies />', () => {
   it('should render', () => {
-    const { container } = render(<Starred />, { wrapper })
+    const { container } = render(<StarredMovies />, { wrapper })
     expect(container).toBeDefined()
+  })
+
+  it.skip('should filter starred movies', async () => {
+    render(<StarredMovies />, { wrapper })
   })
 })

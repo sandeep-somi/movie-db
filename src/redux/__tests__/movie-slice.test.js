@@ -1,4 +1,4 @@
-import moviesSlice, { fetchMovies } from '../moviesSlice'
+import moviesSlice, { fetchMovies } from '../movies-slice'
 import { mockMovies } from '../../constants/jest-helpers'
 
 jest.mock('../../apis', () => ({

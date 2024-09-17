@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import watchLaterSlice from '../redux/watchLaterSlice'
+import watchLaterSlice from '../redux/watch-later-slice'
 import Layout from '../components/layout'
 import { useSearchParams } from 'react-router-dom';
 

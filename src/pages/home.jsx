@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useSearchParams } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchMovies, resetMovies } from '../redux/moviesSlice'
+import { fetchMovies, resetMovies } from '../redux/movies-slice'
 import Movies from '../components/movies'
 import useInfiniteScroll from '../hooks/useInfiniteScroll'
 import Loader from '../components/loader'

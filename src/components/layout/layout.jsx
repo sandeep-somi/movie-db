@@ -4,6 +4,7 @@ import Movies from '../movies/movies'
 
 const Layout = ({ movies, title, subtitle, onClear, query, clearSearch }) => {
   const hasMovies = !!movies.length;
+
   return (
     <div className="layout" data-testid="layout">
       {hasMovies && (

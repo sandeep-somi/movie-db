@@ -1,47 +1,18 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import starredSlice from '../../redux/starredSlice'
-import watchLaterSlice from '../../redux/watchLaterSlice'
+import React, { memo } from 'react';
 import { BASE_MEDIA_URL } from '../../config'
 import useCardOpen from '../../hooks/useCardOpen'
-const Movie = ({ movie, viewTrailer }) => {
-    const state = useSelector((state) => state)
-    const { starred, watchLater } = state
-    const { starMovie, unstarMovie } = starredSlice.actions
-    const { addToWatchLater, removeFromWatchLater } = watchLaterSlice.actions
 
-    const dispatch = useDispatch()
+const Movie = ({
+    movie,
+    viewTrailer,
+    isStarred,
+    watchLater,
+    toggleStarred,
+    toggleWatchLater
+}) => {
     const { isOpen, toggleCard } = useCardOpen()
 
-    const movieData = {
-        id: movie.id,
-        overview: movie.overview,
-        release_date: movie.release_date?.substring(0, 4),
-        poster_path: movie.poster_path,
-        title: movie.title
-    }
-
-    const onAddWatchLater = () => {
-        dispatch(addToWatchLater(movieData))
-    }
-
-    const onRemoveWatchLater = () => {
-        dispatch(removeFromWatchLater(movieData))
-    }
-
-    const onAddToStarred = () => {
-        dispatch(starMovie(movieData))
-    }
-
-    const onRemoveFromStarred = () => {
-        dispatch(unstarMovie(movieData))
-    }
-
     const imgURL = (movie.poster_path) ? `${BASE_MEDIA_URL}${movie.poster_path}` : '/images/not-found-500X750.jpeg'
-
-    // TODO : should refactor to reduce the component inline execution
-    const isStarred = starred.starredMovies.map(movie => movie.id).includes(movie.id)
-    const toWatch = watchLater.watchLaterMovies.map(movie => movie.id).includes(movie.id)
     
     return (
         <div className="movie-item wrapper">
@@ -52,26 +23,26 @@ const Movie = ({ movie, viewTrailer }) => {
                         <div className="overview">{movie.overview}</div>
                         <div className="year">{movie.release_date?.substring(0, 4)}</div>
                         {!isStarred ? (
-                            <span className="btn-star" data-testid="starred-link" onClick={onAddToStarred}>
+                            <span className="btn-star" data-testid="starred-link" onClick={toggleStarred}>
                                 <i className="bi bi-star" />
                             </span>
                         ) : (
-                            <span className="btn-star" data-testid="unstar-link" onClick={onRemoveFromStarred}>
+                                <span className="btn-star" data-testid="unstar-link" onClick={toggleStarred}>
                                 <i className="bi bi-star-fill" data-testid="star-fill" />
                             </span>
                         )}
-                        {!toWatch ? (
+                        {!watchLater ? (
                             <button
                                 type="button"
                                 data-testid="watch-later"
                                 className="btn btn-light btn-watch-later"
-                                onClick={onAddWatchLater}>Watch Later</button>
+                                onClick={toggleWatchLater}>Watch Later</button>
                         ) : (
                             <button
                                 type="button"
                                 data-testid="remove-watch-later"
                                 className="btn btn-light btn-watch-later blue"
-                                onClick={onRemoveWatchLater}
+                                    onClick={toggleWatchLater}
                             >
                                 <i className="bi bi-check"></i> Watch Later
                             </button>
@@ -94,4 +65,4 @@ const Movie = ({ movie, viewTrailer }) => {
     )
 }
 
-export default Movie
+export default memo(Movie)

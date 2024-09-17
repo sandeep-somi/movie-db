@@ -1,9 +1,9 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
 import { persistStore, persistReducer } from "redux-persist"
 import storage from "redux-persist/lib/storage"
-import moviesSlice from '../redux/moviesSlice'
-import starredSlice from '../redux/starredSlice'
-import watchLaterSlice from '../redux/watchLaterSlice'
+import moviesSlice from '../redux/movies-slice'
+import starredSlice from '../redux/starred-slice'
+import watchLaterSlice from '../redux/watch-later-slice'
 
 const starredPersistConfig = {
     key: 'starred',
