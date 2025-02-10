@@ -9,7 +9,7 @@ const WatchLater = () => {
   const { remveAllWatchLater } = watchLaterSlice.actions
   const dispatch = useDispatch()
   const [searchParams, setSearchParams] = useSearchParams()
-  const query = searchParams.get('search')
+  const query = searchParams.get('search') || ''
   const movies = useSelector(({ watchLater }) => {
     if (!query) return watchLater?.watchLaterMovies
     return watchLater?.watchLaterMovies?.filter((movie) => movie.title.toLowerCase().includes(query.toLowerCase()))

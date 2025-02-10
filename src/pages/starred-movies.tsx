@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 const Starred = () => {
   const { clearAllStarred } = starredSlice.actions
   const [searchParams, setSearchParams] = useSearchParams()
-  const query = searchParams.get('search')
+  const query = searchParams.get('search') || ''
   
   const movies = useSelector(({ starred }) => {
     if (!query) return starred?.starredMovies
