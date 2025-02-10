@@ -4,11 +4,11 @@ import { render } from '@testing-library/react'
 // eslint-disable-next-line jest/no-mocks-import
 import wrapper from '../../__mocks__/provider-wrapper'
 // eslint-disable-next-line jest/no-mocks-import
-import { mockMovies } from '../../constants/jest-helpers'
+import { movies } from '../../constants/jest-helpers'
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
-  useSelector: jest.fn(() => mockMovies)
+  useSelector: jest.fn(() => movies)
 }))
 
 describe('<StarredMovies />', () => {

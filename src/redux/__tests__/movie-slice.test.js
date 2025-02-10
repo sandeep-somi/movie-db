@@ -1,9 +1,9 @@
 import moviesSlice, { fetchMovies } from '../movies-slice'
-import { mockMovies } from '../../constants/jest-helpers'
+import { movies } from '../../constants/jest-helpers'
 
 jest.mock('../../apis', () => ({
-    getMoviesAPI: jest.fn(() => Promise.resolve(mockMovies)),
-    discoverMoviesAPI: jest.fn(() => Promise.resolve(mockMovies)),
+    getMoviesAPI: jest.fn(() => Promise.resolve(movies)),
+    discoverMoviesAPI: jest.fn(() => Promise.resolve(movies)),
 }));
 
 describe('moviesSlice', () => {
@@ -16,30 +16,30 @@ describe('moviesSlice', () => {
 
     it('should update movies and page on fetchMovies.fulfilled with page 1', () => {
         const initialState = moviesSlice.initialState;
-        const fulfilledAction = { type: fetchMovies.fulfilled, payload: mockMovies };
+        const fulfilledAction = { type: fetchMovies.fulfilled, payload: movies };
         const newState = moviesSlice.reducer(initialState, fulfilledAction);
 
-        expect(newState.movies).toEqual(mockMovies.results);
-        expect(newState.page).toBe(mockMovies.page);
+        expect(newState.movies).toEqual(movies.results);
+        expect(newState.page).toBe(movies.page);
         expect(newState.loading).toBe(false);
-        expect(newState.hasMore).toBe(mockMovies.results.length > 0);
+        expect(newState.hasMore).toBe(movies.results.length > 0);
     });
 
     it('should update movies and page on fetchMovies.fulfilled with page > 1', () => {
         const existingMovies = [{ id: 1 }, { id: 2 }];
         const initialState = { ...moviesSlice.initialState, movies: existingMovies }; 
         const page2Movies = {
-            ...mockMovies,
+            ...movies,
             page: 2
         }
 
         const fulfilledAction = { type: fetchMovies.fulfilled, payload: page2Movies };
         const newState = moviesSlice.reducer(initialState, fulfilledAction);
 
-        expect(newState.movies).toEqual([...existingMovies, ...mockMovies.results]);
+        expect(newState.movies).toEqual([...existingMovies, ...movies.results]);
         expect(newState.page).toBe(page2Movies.page);
         expect(newState.loading).toBe(false);
-        expect(newState.hasMore).toBe(mockMovies.results.length > 0);
+        expect(newState.hasMore).toBe(movies.results.length > 0);
     });
 
     it('should reset movies state on resetMovies action', () => {

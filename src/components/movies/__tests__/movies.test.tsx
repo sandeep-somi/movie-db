@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import Movies from '../movies'
 // eslint-disable-next-line jest/no-mocks-import
-import { mockMovies, mockMovie } from '../../../constants/jest-helpers'
+import { movies, movie } from '../../../constants/jest-helpers'
 // eslint-disable-next-line jest/no-mocks-import
 import wrapper from '../../../__mocks__/provider-wrapper'
 import userEvent from '@testing-library/user-event'
@@ -21,12 +21,12 @@ jest.mock('react-dom', () => ({
 
 describe('Movies', () => {
   it('should render', () => {
-    const { container } = render(<Movies movies={mockMovies.results} />, { wrapper })
+    const { container } = render(<Movies movies={movies.results} />, { wrapper })
     expect(container).toBeDefined()
   })
 
   it('should open movie trailer', async () => {
-    render(<Movies movies={[mockMovie]} />, { wrapper })
+    render(<Movies movies={[movie]} />, { wrapper })
     const viewTrailer = screen.getByTestId('view-trailer')
     userEvent.click(viewTrailer)
     await waitFor(() => {

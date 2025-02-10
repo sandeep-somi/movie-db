@@ -15,7 +15,7 @@ describe("Header", () => {
 
   it("should clear the query params after search is cleared", () => {
     render(<Header />, { wrapper })
-    const searchInput = screen.getByTestId("search-movies")
+    const searchInput = screen.getByTestId("search-movies") as HTMLInputElement
     expect(searchInput.value).toBe("")
     fireEvent.change(searchInput, { target: { value: "test" } })
     act(() => {
@@ -30,7 +30,7 @@ describe("Header", () => {
 
   it("should updated search in query params", () => {
     render(<Header />, { wrapper })
-    const searchInput = screen.getByTestId("search-movies")
+    const searchInput = screen.getByTestId("search-movies") as HTMLInputElement;
     expect(searchInput.value).toBe("")
     fireEvent.change(searchInput, { target: { value: "test" } })
     act(() => {

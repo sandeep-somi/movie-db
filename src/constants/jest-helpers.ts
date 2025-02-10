@@ -1,4 +1,4 @@
-export const mockMovies = {
+export const movies = {
   "page": 1,
   "results": [
     {
@@ -65,7 +65,7 @@ export const mockMovies = {
   ]
 }
 
-export const mockMovie = {
+export const movie = {
   "adult": false,
   "backdrop_path": "/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg",
   "genre_ids": [

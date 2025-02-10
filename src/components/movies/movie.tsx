@@ -6,8 +6,8 @@ import { TMovie } from '../../redux/types';
 type TMovieComponent = {
     movie: TMovie
     viewTrailer: (movie: TMovie) => void
-    isStarred: boolean
-    watchLater: boolean,
+    isStarred?: boolean
+    watchLater?: boolean,
     toggleStarred: () => void
     toggleWatchLater: () => void
 }
