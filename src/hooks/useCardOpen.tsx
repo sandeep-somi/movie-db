@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 const useCardOpen = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const toggleCard = () => {
     if (window.innerWidth < 481) {

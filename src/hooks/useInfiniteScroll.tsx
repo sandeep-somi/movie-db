@@ -1,9 +1,9 @@
 import { useRef, useCallback } from 'react';
 
 const useInfiniteScroll = (callback, hasMore, loading) => {
-  const observer = useRef();
+  const observer = useRef<IntersectionObserver | null>();
 
-  const lastElementRef = useCallback(node => {
+  const lastElementRef = useCallback((node?: HTMLDivElement | null) => {
     if (loading) return;
     if (observer.current) observer.current.disconnect();
 

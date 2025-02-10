@@ -5,7 +5,7 @@ module.exports = async () => ({
   transform: {
     "\\.[jt]sx?$": "babel-jest"
   },
-  setupFilesAfterEnv: ["<rootDir>/src/setup-tests.js"],
+  setupFilesAfterEnv: ["<rootDir>/src/setup-tests.ts"],
   moduleNameMapper: {
     '\\.scss$': '<rootDir>/src/__mocks__/style.mock.js',
      '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/src/__mocks__/file.mock.js',

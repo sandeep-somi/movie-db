@@ -1,11 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { TMovie } from "./types"
+
+export type TStarredMovieStore = {
+    starredMovies: TMovie[]
+    ids: number[]
+}
+
+const initialState: TStarredMovieStore = {
+        starredMovies: [],
+        ids: [],
+    }
 
 const starredSlice = createSlice({
     name: 'starred',
-    initialState: {
-        starredMovies: [],
-        ids: [],
-    },
+    initialState,
     reducers: {
         starMovie: (state, action) => {
             state.starredMovies = [action.payload, ...state.starredMovies]

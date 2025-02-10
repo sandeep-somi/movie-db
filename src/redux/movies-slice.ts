@@ -1,24 +1,47 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getMoviesAPI, discoverMoviesAPI } from "../apis"
+import { TMovie } from "./types"
 
-export const fetchMovies = createAsyncThunk('fetch-movies', async ({ page, query }) => {
-    if (query) {
-        const movies = await getMoviesAPI({ page, query })
+export type TMoviesStore = {
+    movies: TMovie[]
+    page: number
+    hasMore: boolean
+    loading: boolean
+}
+
+type TFeatchMovieReq = {
+    page: number
+    query?: string | null
+}
+
+type TFetchMovieRes = {
+    page: number
+    results: TMovie[]
+}
+
+export const fetchMovies = createAsyncThunk<TFetchMovieRes, TFeatchMovieReq>(
+    'fetch-movies',
+    async ({ page, query }: TFeatchMovieReq) => {
+        if (query) {
+            const movies = await getMoviesAPI({ page, query })
+            return movies
+        }
+
+        const movies = await discoverMoviesAPI({ page })
         return movies
     }
+)
 
-    const movies = await discoverMoviesAPI({ page })
-    return movies
-})
-
-const moviesSlice = createSlice({
-    name: 'movies',
-    initialState: {
+const initialState: TMoviesStore = {
         movies: [],
         page: 0,
         hasMore: false,
         loading: false,
-    },
+    }
+
+const moviesSlice = createSlice({
+    name: 'movies',
+    initialState,
     reducers: {
         resetMovies: (state) => {
             state.movies = []
@@ -48,4 +71,4 @@ const moviesSlice = createSlice({
 
 export const { resetMovies } = moviesSlice.actions
 
-export default moviesSlice
+export default moviesSlice 

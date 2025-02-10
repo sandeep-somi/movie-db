@@ -1,7 +1,6 @@
 import React from 'react'
 
-// Can be enhanced with a spinner
-const Loader = () => (
+const Loader: React.FC = () => (
   <div>Loading...</div>
 )
 

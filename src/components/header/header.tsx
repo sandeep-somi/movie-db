@@ -2,9 +2,10 @@ import React from 'react';
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import Search from '../search/search';
+import { TRootStore } from '../../redux/types';
 
 const Header = () => {
-  const { starredMovies } = useSelector(state => state.starred);
+  const { starredMovies } = useSelector((state: TRootStore) => state.starred);
 
   const renderStarredIcon = () => {
     if (starredMovies.length) {

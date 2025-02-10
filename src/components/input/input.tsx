@@ -1,5 +1,5 @@
+import React from 'react'
 
-//TODO: enhance later
 const Input = (props) => {
   return <input {...props} />
 }

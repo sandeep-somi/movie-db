@@ -1,9 +1,10 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
+import { configureStore, Store } from "@reduxjs/toolkit"
 import { persistStore, persistReducer } from "redux-persist"
 import storage from "redux-persist/lib/storage"
-import moviesSlice from '../redux/movies-slice'
-import starredSlice from '../redux/starred-slice'
-import watchLaterSlice from '../redux/watch-later-slice'
+import moviesSlice from './movies-slice'
+import starredSlice from './starred-slice'
+import watchLaterSlice from './watch-later-slice'
+import { TRootStore } from "./types"
 
 const starredPersistConfig = {
     key: 'starred',
@@ -18,18 +19,12 @@ const watchLaterPersistConfig = {
 const persistedStarredReducer = persistReducer(starredPersistConfig, starredSlice.reducer)
 const persistedWatchLaterReducer = persistReducer(watchLaterPersistConfig, watchLaterSlice.reducer)
 
-const store = configureStore({
+const store: Store<TRootStore> = configureStore({
     reducer: {
         movies: moviesSlice.reducer,
         starred: persistedStarredReducer,
         watchLater: persistedWatchLaterReducer,
-    },
-    middleware: getDefaultMiddleware({
-        serializableCheck: {
-            ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
-            ignoredPaths: ['starred.register', 'watchLater.register'],
-        },
-    }),
+    }
 })
 
 const persistor = persistStore(store)

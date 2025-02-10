@@ -24,7 +24,7 @@ const { starMovie, unstarMovie } = starredSlice.actions
 const { addToWatchLater, removeFromWatchLater } = watchLaterSlice.actions
 
 const Movies = ({ movies }) => {
-    const [videoKey, setVideoKey] = useState()
+    const [videoKey, setVideoKey] = useState<number>()
     const { starredIds, watchLaterIds } = useSelector(selectIds);
     const dispatch = useDispatch()
     
@@ -49,7 +49,7 @@ const Movies = ({ movies }) => {
         }
     }
 
-    const getMovie = async (id) => {
+    const getMovie = async (id: number) => {
         const { videos = [] } = await getMovieAPI(id)
         if (videos?.results?.length) {
             const trailer = videos.results.find((vid) => vid.type === 'Trailer')
@@ -76,7 +76,7 @@ const Movies = ({ movies }) => {
                     )
                 })}
             </div>
-            <Modal data-testid="modal" isOpen={!!videoKey} onClose={() => setVideoKey('')}>
+            <Modal data-testid="modal" isOpen={!!videoKey} onClose={() => setVideoKey(undefined)}>
                 <YouTubePlayer videoKey={videoKey} />
             </Modal>
         </>
