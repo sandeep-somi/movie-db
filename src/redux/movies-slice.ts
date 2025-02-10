@@ -19,7 +19,7 @@ type TFetchMovieRes = {
     results: TMovie[]
 }
 
-export const fetchMovies = createAsyncThunk<TFetchMovieRes, TFeatchMovieReq>(
+export const fetchMovies = createAsyncThunk(
     'fetch-movies',
     async ({ page, query }: TFeatchMovieReq) => {
         if (query) {

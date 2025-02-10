@@ -16,12 +16,12 @@ const Discover = () => {
 
   useEffect(() => {
     dispatch(resetMovies());
-    dispatch(fetchMovies({ page: 1, query }))
+    dispatch(fetchMovies({ page: 1, query }) as any)
   }, [query, dispatch])
 
   const loadMoreMovies = () => {
     if (!loading && hasMore) {
-      dispatch(fetchMovies({ page: page + 1, query }))
+      dispatch(fetchMovies({ page: page + 1, query }) as any)
     }
   };
 
